@@ -1,0 +1,30 @@
+package org.example.meetingcalendarapi.controller;
+
+import org.example.meetingcalendarapi.dto.MeetingDto;
+import org.example.meetingcalendarapi.service.MeetingService;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/meetings")
+public class MeetingController {
+    private final MeetingService meetingService;
+
+    public MeetingController(MeetingService meetingService) {
+        this.meetingService = meetingService;
+    }
+    
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<MeetingDto> getAllMeetings() {
+        return meetingService.findAll();
+    }
+    
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED) 
+    public MeetingDto createMeeting(@RequestBody MeetingDto meetingDto) {
+        return meetingService.createMeeting(meetingDto);
+    }
+}

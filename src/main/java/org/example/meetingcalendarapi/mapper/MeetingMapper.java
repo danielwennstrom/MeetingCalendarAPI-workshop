@@ -1,0 +1,15 @@
+package org.example.meetingcalendarapi.mapper;
+import org.example.meetingcalendarapi.dto.MeetingDto;
+import org.example.meetingcalendarapi.model.Meeting;
+import org.mapstruct.Mapper;
+
+import java.util.List;
+
+@Mapper(componentModel = "spring")
+public interface MeetingMapper {
+    Meeting toEntity(MeetingDto meetingDto);
+    MeetingDto toDto(Meeting meeting);
+    
+    List<Meeting> toEntityList(List<MeetingDto> dtoList);
+    List<MeetingDto> toDtoList(List<Meeting> meetingList);
+}
