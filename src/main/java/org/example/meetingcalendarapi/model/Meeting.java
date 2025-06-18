@@ -1,6 +1,8 @@
 package org.example.meetingcalendarapi.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
@@ -11,7 +13,8 @@ import java.time.LocalTime;
 @Data
 public class Meeting {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String description;
     private LocalDate date;
@@ -22,8 +25,7 @@ public class Meeting {
     public Meeting() {
     }
 
-    public Meeting(int id, String title, String description, LocalDate date, LocalTime time, String level, String participants) {
-        this.id = id;
+    public Meeting(String title, String description, LocalDate date, LocalTime time, String level, String participants) {
         this.title = title;
         this.description = description;
         this.date = date;

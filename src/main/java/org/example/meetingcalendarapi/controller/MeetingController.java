@@ -34,4 +34,10 @@ public class MeetingController {
     public MeetingDto updateMeeting(@PathVariable Long id, @RequestBody MeetingDto meetingDto) {
         return meetingService.updateMeeting(id, meetingDto);
     }
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMeeting(@PathVariable Long id) {
+        meetingService.deleteMeeting(id);
+    }
 }
