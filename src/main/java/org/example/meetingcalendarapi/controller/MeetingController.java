@@ -23,6 +23,12 @@ public class MeetingController {
         return meetingService.findAll();
     }
     
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public MeetingDto getMeetingById(@PathVariable Long id) {
+        return meetingService.findById(id);
+    }
+    
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) 
     public MeetingDto createMeeting(@RequestBody MeetingDto meetingDto) {

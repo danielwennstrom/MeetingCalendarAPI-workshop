@@ -51,4 +51,14 @@ public class MeetingServiceImpl implements MeetingService {
     public List<MeetingDto> findAll() {
         return meetingMapper.toDtoList((List<Meeting>) meetingRepository.findAll());
     }
+    
+    @Override
+    public MeetingDto findById(Long id) {
+        Meeting existingMeeting = meetingRepository.findById(id).orElse(null);
+        if (existingMeeting == null) {
+            throw new IllegalArgumentException("Meeting not found");
+        }
+        
+        return meetingMapper.toDto(existingMeeting);
+    }
 }
