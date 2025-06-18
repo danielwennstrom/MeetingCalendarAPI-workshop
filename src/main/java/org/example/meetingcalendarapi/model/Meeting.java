@@ -1,13 +1,10 @@
 package org.example.meetingcalendarapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.example.meetingcalendarapi.enums.MeetingLevel;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Data
@@ -17,19 +14,18 @@ public class Meeting {
     private Long id;
     private String title;
     private String description;
-    private LocalDate date;
-    private LocalTime time;
-    private String level;
+    private ZonedDateTime dateTime;
+    @Enumerated(EnumType.STRING)
+    private MeetingLevel level;
     private String participants;
     
     public Meeting() {
     }
 
-    public Meeting(String title, String description, LocalDate date, LocalTime time, String level, String participants) {
+    public Meeting(String title, String description, ZonedDateTime dateTime, MeetingLevel level, String participants) {
         this.title = title;
         this.description = description;
-        this.date = date;
-        this.time = time;
+        this.dateTime = dateTime;
         this.level = level;
         this.participants = participants;
     }
