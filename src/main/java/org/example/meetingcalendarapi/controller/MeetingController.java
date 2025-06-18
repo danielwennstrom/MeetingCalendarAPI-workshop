@@ -28,4 +28,10 @@ public class MeetingController {
     public MeetingDto createMeeting(@RequestBody MeetingDto meetingDto) {
         return meetingService.createMeeting(meetingDto);
     }
+    
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public MeetingDto updateMeeting(@PathVariable Long id, @RequestBody MeetingDto meetingDto) {
+        return meetingService.updateMeeting(id, meetingDto);
+    }
 }

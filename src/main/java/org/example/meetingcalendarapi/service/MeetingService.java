@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface MeetingService {
     MeetingDto createMeeting(MeetingDto meetingDto);
+    MeetingDto updateMeeting(Long id, MeetingDto meetingDto);
     List<MeetingDto> findAll();
 }

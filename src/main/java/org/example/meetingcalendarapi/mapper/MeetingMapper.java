@@ -2,6 +2,7 @@ package org.example.meetingcalendarapi.mapper;
 import org.example.meetingcalendarapi.dto.MeetingDto;
 import org.example.meetingcalendarapi.model.Meeting;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface MeetingMapper {
     
     List<Meeting> toEntityList(List<MeetingDto> dtoList);
     List<MeetingDto> toDtoList(List<Meeting> meetingList);
+    
+    void updateEntity(MeetingDto dto, @MappingTarget Meeting entity);
 }

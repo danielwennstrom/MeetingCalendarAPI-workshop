@@ -1,5 +1,6 @@
 package org.example.meetingcalendarapi.service;
 
+import org.apache.catalina.User;
 import org.example.meetingcalendarapi.dto.MeetingDto;
 import org.example.meetingcalendarapi.mapper.MeetingMapper;
 import org.example.meetingcalendarapi.model.Meeting;
@@ -24,6 +25,17 @@ public class MeetingServiceImpl implements MeetingService {
     public MeetingDto createMeeting(MeetingDto meetingDto) {
         Meeting mappedMeeting = meetingMapper.toEntity(meetingDto);
         return meetingMapper.toDto(meetingRepository.save(mappedMeeting));
+    }
+
+    @Override
+    public MeetingDto updateMeeting(Long id, MeetingDto meetingDto) {
+        Meeting existingMeeting = meetingRepository.findById(id).orElse(null);
+        if (existingMeeting == null) {
+            throw new IllegalArgumentException("Meeting not found");
+        }
+        meetingMapper.updateEntity(meetingDto, existingMeeting);
+
+        return meetingMapper.toDto(meetingRepository.save(existingMeeting));
     }
 
     @Override
