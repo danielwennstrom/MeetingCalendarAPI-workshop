@@ -20,13 +20,13 @@ public class MeetingController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<MeetingDto> getAllMeetings() {
-        return meetingService.findAll();
+        return meetingService.getAll();
     }
     
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MeetingDto getMeetingById(@PathVariable Long id) {
-        return meetingService.findById(id);
+        return meetingService.getById(id);
     }
     
     @PostMapping

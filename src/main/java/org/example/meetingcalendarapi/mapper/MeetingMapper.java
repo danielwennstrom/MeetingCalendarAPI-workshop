@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MeetingMapper {
     @Mapping(source = "level", target = "level")
-    Meeting toEntity(MeetingDto meetingDto);
-    MeetingDto toDto(Meeting meeting);
+    Meeting toEntity(MeetingDto dto);
+    MeetingDto toDto(Meeting entity);
     
     List<Meeting> toEntityList(List<MeetingDto> dtoList);
-    List<MeetingDto> toDtoList(List<Meeting> meetingList);
+    List<MeetingDto> toDtoList(List<Meeting> entityList);
     
     void updateEntity(MeetingDto dto, @MappingTarget Meeting entity);
 }

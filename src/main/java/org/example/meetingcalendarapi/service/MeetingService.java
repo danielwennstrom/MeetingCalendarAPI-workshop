@@ -8,6 +8,6 @@ public interface MeetingService {
     MeetingDto createMeeting(MeetingDto meetingDto);
     MeetingDto updateMeeting(Long id, MeetingDto meetingDto);
     void deleteMeeting(Long id);
-    MeetingDto findById(Long id);
-    List<MeetingDto> findAll();
+    MeetingDto getById(Long id);
+    List<MeetingDto> getAll();
 }
