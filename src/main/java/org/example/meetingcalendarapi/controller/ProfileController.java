@@ -1,10 +1,9 @@
 package org.example.meetingcalendarapi.controller;
 
 import org.example.meetingcalendarapi.dto.ProfileDto;
-import org.example.meetingcalendarapi.model.Profile;
 import org.example.meetingcalendarapi.service.ProfileService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +15,16 @@ public class ProfileController {
     public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
     }
-    
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<ProfileDto> getAllProfiles() {
         return profileService.getAll();
+    }
+    
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProfileDto getProfileById(@PathVariable Long id) {
+        return profileService.getById(id);
     }
 }
