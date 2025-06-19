@@ -12,7 +12,7 @@ public class Profile {
     private Long id;
     private String name;
     private String email;
-    private String phone;
+    private String phoneNumber;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
