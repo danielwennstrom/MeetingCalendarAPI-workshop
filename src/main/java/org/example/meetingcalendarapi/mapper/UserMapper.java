@@ -7,11 +7,11 @@ import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ProfileMapper.class})
 public interface UserMapper {
     User toEntity(UserDto dto);
     UserDto toDto(User entity);
-
+    
     List<User> toEntityList(List<UserDto> dtoList);
     List<UserDto> toDtoList(List<User> entityList);
 

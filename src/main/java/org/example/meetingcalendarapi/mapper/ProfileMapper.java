@@ -1,7 +1,6 @@
 package org.example.meetingcalendarapi.mapper;
 
 import org.example.meetingcalendarapi.dto.ProfileDto;
-import org.example.meetingcalendarapi.model.Meeting;
 import org.example.meetingcalendarapi.model.Profile;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
