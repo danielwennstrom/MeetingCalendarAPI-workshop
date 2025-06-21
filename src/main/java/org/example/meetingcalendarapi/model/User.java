@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.example.meetingcalendarapi.enums.UserRole;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name ="users")
@@ -18,4 +20,19 @@ public class User {
     private UserRole role;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Profile profile;
+    
+    public User(String username, String password, Profile profile) {
+        this.username = username;
+        this.password = password;
+        this.profile = profile;
+    }
+    
+    public User() { }
+    
+    @PrePersist
+    private void prePersist() {
+        if (this.role == null) {
+            this.role = UserRole.USER;
+        }
+    }
 }
