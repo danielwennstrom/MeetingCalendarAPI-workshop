@@ -3,11 +3,11 @@ package org.example.meetingcalendarapi.controller;
 import org.example.meetingcalendarapi.dto.MeetingDto;
 import org.example.meetingcalendarapi.service.MeetingService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/meetings")
 public class MeetingController {
@@ -29,6 +29,7 @@ public class MeetingController {
         return meetingService.getById(id);
     }
     
+    @PreAuthorize("hasRole('USER')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) 
     public MeetingDto createMeeting(@RequestBody MeetingDto meetingDto) {

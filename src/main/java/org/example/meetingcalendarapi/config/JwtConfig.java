@@ -21,7 +21,9 @@ public class JwtConfig {
     @Bean
     public JwtDecoder jwtDecoder() {
         byte[] decodedKey = Base64.getDecoder().decode(jwtProperties.getSecretKey());
-        SecretKey secretKey = new SecretKeySpec(decodedKey, "HmacSHA512");
-        return NimbusJwtDecoder.withSecretKey(secretKey).build();
+        SecretKey secretKey = new SecretKeySpec(decodedKey, "HMAC");
+        return NimbusJwtDecoder.withSecretKey(secretKey)
+                .macAlgorithm(MacAlgorithm.HS512)
+                .build();
     }
 }
