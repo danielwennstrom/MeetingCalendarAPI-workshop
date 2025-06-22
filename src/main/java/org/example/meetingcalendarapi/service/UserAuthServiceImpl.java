@@ -19,7 +19,8 @@ public class UserAuthServiceImpl implements UserAuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserAuthServiceImpl(UserRepository userRepository, UserMapper userMapper, UserRegisterMapper userRegisterMapper, PasswordEncoder passwordEncoder) {
+    public UserAuthServiceImpl(UserRepository userRepository, UserMapper userMapper,
+                               UserRegisterMapper userRegisterMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.userRegisterMapper = userRegisterMapper;
@@ -28,12 +29,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 
     @Override
     public UserDto getUserByUsername(String username) {
-        User existingUser = userRepository.findByUsername(username);
-        if (existingUser != null) {
-            return userMapper.toDto(existingUser);
-        }
-        
-        return null;
+        return userMapper.toDto(userRepository.findByUsername(username).orElse(null));
     }
 
     @Transactional
