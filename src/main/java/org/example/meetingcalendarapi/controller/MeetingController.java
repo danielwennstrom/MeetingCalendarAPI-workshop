@@ -4,6 +4,7 @@ import org.example.meetingcalendarapi.dto.MeetingDto;
 import org.example.meetingcalendarapi.service.MeetingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +33,9 @@ public class MeetingController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) 
-    public MeetingDto createMeeting(@RequestBody MeetingDto meetingDto) {
-        return meetingService.createMeeting(meetingDto);
+    public MeetingDto createMeeting(@RequestBody MeetingDto meetingDto, Authentication authentication) {
+        String username = authentication.getName();
+        return meetingService.createMeeting(meetingDto, username);
     }
     
     @PutMapping("/{id}")

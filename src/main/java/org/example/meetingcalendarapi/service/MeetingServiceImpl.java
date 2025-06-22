@@ -3,7 +3,9 @@ package org.example.meetingcalendarapi.service;
 import org.example.meetingcalendarapi.dto.MeetingDto;
 import org.example.meetingcalendarapi.mapper.MeetingMapper;
 import org.example.meetingcalendarapi.model.Meeting;
+import org.example.meetingcalendarapi.model.User;
 import org.example.meetingcalendarapi.repository.MeetingRepository;
+import org.example.meetingcalendarapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,24 @@ import java.util.List;
 public class MeetingServiceImpl implements MeetingService {
     private final MeetingRepository meetingRepository;
     private final MeetingMapper meetingMapper;
+    private final UserRepository userRepository;
     
     @Autowired
-    public MeetingServiceImpl(MeetingRepository meetingRepository, MeetingMapper meetingMapper) {
+    public MeetingServiceImpl(MeetingRepository meetingRepository, MeetingMapper meetingMapper, UserRepository userRepository) {
         this.meetingRepository = meetingRepository;
         this.meetingMapper = meetingMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
-    public MeetingDto createMeeting(MeetingDto meetingDto) {
+    public MeetingDto createMeeting(MeetingDto meetingDto, String creatorUsername) {
         Meeting mappedMeeting = meetingMapper.toEntity(meetingDto);
+        User creator = userRepository.findByUsername(creatorUsername).orElseThrow();
+        mappedMeeting.setCreator(creator);
+        
+        List<User> participants = (List<User>) userRepository.findAllById(meetingDto.getParticipantIds());
+        mappedMeeting.setParticipants(participants);
+        
         return meetingMapper.toDto(meetingRepository.save(mappedMeeting));
     }
 

@@ -22,6 +22,8 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Profile profile;
+    @ManyToMany(mappedBy = "participants")
+    private List<Meeting> meetings;
     
     public User(String username, String password, Profile profile) {
         this.username = username;
