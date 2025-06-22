@@ -14,6 +14,7 @@ public class Profile {
     private String name;
     private String email;
     private String phoneNumber;
+    private String avatarUrl;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonBackReference

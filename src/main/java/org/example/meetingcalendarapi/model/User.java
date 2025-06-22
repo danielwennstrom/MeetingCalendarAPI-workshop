@@ -24,6 +24,7 @@ public class User {
     private Profile profile;
     @ManyToMany(mappedBy = "participants")
     private List<Meeting> meetings;
+    private boolean searchEnabled = true;
     
     public User(String username, String password, Profile profile) {
         this.username = username;
@@ -38,5 +39,8 @@ public class User {
         if (this.role == null) {
             this.role = UserRole.USER;
         }
+
+        if (this.username.equals("admin"))
+            this.searchEnabled = false;
     }
 }
