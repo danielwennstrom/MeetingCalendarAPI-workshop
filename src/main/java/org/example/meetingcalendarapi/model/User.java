@@ -1,5 +1,6 @@
 package org.example.meetingcalendarapi.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.example.meetingcalendarapi.enums.UserRole;
@@ -19,6 +20,7 @@ public class User {
     private String password;
     private UserRole role;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Profile profile;
     
     public User(String username, String password, Profile profile) {
