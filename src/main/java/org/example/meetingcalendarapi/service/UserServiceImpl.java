@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> getAllSearchable() {
+        return userMapper.toDtoList(userRepository.findBySearchEnabledTrue());
+    }
+
+    @Override
     public boolean isAdmin(String username) {
         return userRepository.findByUsername(username).isPresent() &&
                 userRepository.findByUsername(username).get().getRole().equals(UserRole.ADMIN);

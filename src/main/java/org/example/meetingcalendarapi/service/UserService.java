@@ -8,5 +8,6 @@ public interface UserService {
     UserDto getById(Long id);
     UserDto getByUsername(String username);
     List<UserDto> getAll();
+    List<UserDto> getAllSearchable();
     boolean isAdmin(String username);
 }

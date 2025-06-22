@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getAllUsers() {
-        return userService.getAll();
+        return userService.getAllSearchable();
     }
 
     @GetMapping("/{id}")
