@@ -1,5 +1,6 @@
 package org.example.meetingcalendarapi.controller;
 
+import jakarta.validation.Valid;
 import org.example.meetingcalendarapi.dto.MeetingDto;
 import org.example.meetingcalendarapi.dto.UserDto;
 import org.example.meetingcalendarapi.service.MeetingService;
@@ -35,14 +36,14 @@ public class MeetingController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) 
-    public MeetingDto createMeeting(@RequestBody MeetingDto meetingDto, Authentication authentication) {
+    public MeetingDto createMeeting(@RequestBody @Valid MeetingDto meetingDto, Authentication authentication) {
         String username = authentication.getName();
         return meetingService.createMeeting(meetingDto, username);
     }
     
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public MeetingDto updateMeeting(@PathVariable Long id, @RequestBody MeetingDto meetingDto) {
+    public MeetingDto updateMeeting(@PathVariable Long id, @RequestBody @Valid MeetingDto meetingDto) {
         return meetingService.updateMeeting(id, meetingDto);
     }
     

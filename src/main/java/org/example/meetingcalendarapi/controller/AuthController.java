@@ -1,5 +1,6 @@
 package org.example.meetingcalendarapi.controller;
 
+import jakarta.validation.Valid;
 import org.example.meetingcalendarapi.dto.LoginRequest;
 import org.example.meetingcalendarapi.dto.TokenRequest;
 import org.example.meetingcalendarapi.dto.UserRegisterDto;
@@ -41,7 +42,7 @@ public class AuthController {
     }
     
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserRegisterDto userRegisterDto) {
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto) {
         userAuthService.registerUser(userRegisterDto);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userRegisterDto.getUsername(), userRegisterDto.getPassword())
