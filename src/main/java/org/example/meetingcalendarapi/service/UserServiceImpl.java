@@ -42,6 +42,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> getAllById(List<Long> ids) {
+        return userMapper.toDtoList((List<User>) userRepository.findAllById(ids));
+    }
+
+    @Override
     public boolean isAdmin(String username) {
         return userRepository.findByUsername(username).isPresent() &&
                 userRepository.findByUsername(username).get().getRole().equals(UserRole.ADMIN);

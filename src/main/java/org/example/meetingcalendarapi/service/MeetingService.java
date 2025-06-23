@@ -1,7 +1,9 @@
 package org.example.meetingcalendarapi.service;
 
 import org.example.meetingcalendarapi.dto.MeetingDto;
+import org.example.meetingcalendarapi.dto.UserDto;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface MeetingService {
@@ -10,4 +12,5 @@ public interface MeetingService {
     void deleteMeeting(Long id);
     MeetingDto getById(Long id);
     List<MeetingDto> getAll();
+    List<MeetingDto> getMeetingsByDateTimeIsAfterAndParticipants(ZonedDateTime zonedDateTime, List<Long> participantIds);
 }

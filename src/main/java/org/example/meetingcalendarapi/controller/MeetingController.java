@@ -1,12 +1,14 @@
 package org.example.meetingcalendarapi.controller;
 
 import org.example.meetingcalendarapi.dto.MeetingDto;
+import org.example.meetingcalendarapi.dto.UserDto;
 import org.example.meetingcalendarapi.service.MeetingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -48,5 +50,11 @@ public class MeetingController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMeeting(@PathVariable Long id) {
         meetingService.deleteMeeting(id);
+    }
+    
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MeetingDto> getFilteredMeetings(@RequestParam("dateTime") ZonedDateTime dateTime, @RequestParam List<Long> participantIds) {
+        return meetingService.getMeetingsByDateTimeIsAfterAndParticipants(dateTime, participantIds);
     }
 }
