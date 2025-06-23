@@ -10,5 +10,6 @@ public interface UserService {
     List<UserDto> getAll();
     List<UserDto> getAllSearchable();
     List<UserDto> getAllById(List<Long> ids);
+    UserDto updateUser(Long id, UserDto userDto);
     boolean isAdmin(String username);
 }

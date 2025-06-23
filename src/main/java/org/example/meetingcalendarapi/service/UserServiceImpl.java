@@ -1,5 +1,6 @@
 package org.example.meetingcalendarapi.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.meetingcalendarapi.dto.UserDto;
 import org.example.meetingcalendarapi.enums.UserRole;
 import org.example.meetingcalendarapi.mapper.UserMapper;
@@ -44,6 +45,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllById(List<Long> ids) {
         return userMapper.toDtoList((List<User>) userRepository.findAllById(ids));
+    }
+
+    @Override
+    public UserDto updateUser(Long id, UserDto userDto) {
+        User existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser == null) {
+            throw new EntityNotFoundException("User not found");
+        }
+        
+        userMapper.updateEntity(userDto, existingUser);
+        return userMapper.toDto(userRepository.save(existingUser));
     }
 
     @Override
