@@ -81,6 +81,16 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
+    public List<MeetingDto> getMeetingsByDateTimeBetweenAndParticipants(ZonedDateTime dateTimeAfter, 
+                                                                        ZonedDateTime dateTimeBefore, List<Long> participantIds) {
+        List<User> participants = userMapper.toEntityList(userService.getAllById(participantIds));
+        List<Meeting> meetings = meetingRepository.findMeetingsByDateTimeBetweenAndParticipants(dateTimeAfter, 
+                dateTimeBefore, participants);
+
+        return meetingMapper.toDtoList(meetings);
+    }
+
+    @Override
     public MeetingDto getById(Long id) {
         Meeting existingMeeting = meetingRepository.findById(id).orElse(null);
         if (existingMeeting == null) {

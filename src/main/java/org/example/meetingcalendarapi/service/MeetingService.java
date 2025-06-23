@@ -13,4 +13,6 @@ public interface MeetingService {
     MeetingDto getById(Long id);
     List<MeetingDto> getAll();
     List<MeetingDto> getMeetingsByDateTimeIsAfterAndParticipants(ZonedDateTime zonedDateTime, List<Long> participantIds);
+    List<MeetingDto> getMeetingsByDateTimeBetweenAndParticipants(ZonedDateTime dateTimeAfter, 
+                                                                 ZonedDateTime dateTimeBefore, List<Long> participantIds);
 }

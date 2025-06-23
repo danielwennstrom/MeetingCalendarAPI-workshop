@@ -54,7 +54,15 @@ public class MeetingController {
     
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public List<MeetingDto> getFilteredMeetings(@RequestParam("dateTime") ZonedDateTime dateTime, @RequestParam List<Long> participantIds) {
-        return meetingService.getMeetingsByDateTimeIsAfterAndParticipants(dateTime, participantIds);
+    public List<MeetingDto> getFilteredMeetings(
+            @RequestParam("dateTime") ZonedDateTime dateTime,
+            @RequestParam(value = "dateTimeBefore", required = false) ZonedDateTime dateTimeBefore,
+            @RequestParam List<Long> participantIds) {
+
+        if (dateTimeBefore != null) {
+            return meetingService.getMeetingsByDateTimeBetweenAndParticipants(dateTime, dateTimeBefore, participantIds);
+        } else {
+            return meetingService.getMeetingsByDateTimeIsAfterAndParticipants(dateTime, participantIds);
+        }
     }
 }
