@@ -20,7 +20,6 @@ public class MeetingDto {
     private ZonedDateTime dateTime;
     @NotNull
     private MeetingLevel level;
-    @NotNull
     private UserDto creator;
     private List<UserDto> participants;
     private List<Long> participantIds;
