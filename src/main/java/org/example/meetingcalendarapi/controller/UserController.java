@@ -1,10 +1,10 @@
 package org.example.meetingcalendarapi.controller;
 
+import jakarta.validation.Valid;
 import org.example.meetingcalendarapi.dto.UserDto;
-import org.example.meetingcalendarapi.mapper.UserMapper;
-import org.example.meetingcalendarapi.model.User;
 import org.example.meetingcalendarapi.service.UserService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,5 +47,12 @@ public class UserController {
         }
         
         return currentUser;
+    }
+    
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public UserDto updateUser(@PathVariable Long id, @RequestBody @Valid UserDto userDto) {
+        return userService.updateUser(id, userDto);
     }
 }
