@@ -110,7 +110,9 @@ Add PostgreSQL dependency to `pom.xml`:
 
 ```xml  
 <dependency>  
-  <groupId>org.postgresql</groupId>  <artifactId>postgresql</artifactId></dependency>  
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+</dependency>  
 ```  
   
 ---  
