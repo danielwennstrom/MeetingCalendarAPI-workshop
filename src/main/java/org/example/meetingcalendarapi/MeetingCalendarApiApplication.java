@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MeetingCalendarApiApplication {
 
     public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.configure().directory("src/main/config/.env").load();
-
-        System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
-        System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
         SpringApplication.run(MeetingCalendarApiApplication.class, args);
     }
 

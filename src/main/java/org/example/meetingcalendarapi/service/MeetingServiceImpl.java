@@ -32,7 +32,7 @@ public class MeetingServiceImpl implements MeetingService {
     @Override
     public MeetingDto createMeeting(MeetingDto meetingDto, String creatorUsername) {
         Meeting mappedMeeting = meetingMapper.toEntity(meetingDto);
-
+        
         UserDto creatorDto = userService.getByUsername(creatorUsername);
         User creator = userMapper.toEntity(creatorDto);
         mappedMeeting.setCreator(creator);
