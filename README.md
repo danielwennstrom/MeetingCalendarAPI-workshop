@@ -22,7 +22,7 @@ This is a Spring Boot REST API that powers the [Meeting Calendar frontend](https
 - Lombok
 - Maven
 
----
+---  
 
 ## Getting Started
 
@@ -34,10 +34,10 @@ This is a Spring Boot REST API that powers the [Meeting Calendar frontend](https
 
 ### Clone and Set Up
 
-```bash
-git clone https://github.com/danielwennstrom/MeetingCalendarAPI-workshop.git
+```bash  
+git clone https://github.com/danielwennstrom/MeetingCalendarAPI-workshop.git 
 cd MeetingCalendarAPI-workshop
-```
+```  
 
 ### Configure `application.properties`
 
@@ -45,46 +45,53 @@ The project uses **MariaDB** by default. Make sure your database is running and 
 
 Update `src/main/resources/application.properties`:
 
-```properties
-# Database connection (MariaDB)
+```properties  
+# Database connection (MariaDB)  
 spring.datasource.url=jdbc:mariadb://localhost:3306/meetingcalendar
 spring.datasource.username=your_db_username
 spring.datasource.password=your_db_password
 spring.jpa.hibernate.ddl-auto=update
-
-# JWT configuration
+  
+# JWT configuration  
 jwt.secretKey=your_very_long_secret_key
 jwt.expirationMs=86400000
-```
+```  
 
 To generate a secure JWT key:
 
-```bash
+```bash  
 openssl rand -base64 64
-```
+```  
 
+Alternatively, use an online Base64 encoder.
+
+Requirements
+
+    Algorithm: HS512 (HMAC with SHA-512)  
+    Minimum Key Length: 64 bytes (512 bits) before Base64 encoding  
+    Encoding: Must be Base64  
 ### Run the application
 
-```bash
+```bash  
 ./mvnw spring-boot:run
-```
+```  
 
 App will start on `http://localhost:8080`.
-
----
+  
+---  
 
 ## Default Admin User
 
 When the application starts, a default admin is created if none exists:
 
-```
-Username: admin
-Password: L!Bcu4:EHXY;i#2
-```
+```  
+Username: admin  
+Password: L!Bcu4:EHXY;i#2  
+```  
 
 You can use this account to log in and access admin-only features. Other test users are also seeded in the database upon first launch.
-
----
+  
+---  
 
 ## Switching Databases
 
@@ -92,23 +99,21 @@ To use another database (e.g., PostgreSQL or H2), change the following in `appli
 
 ### PostgreSQL example:
 
-```properties
+```properties  
 spring.datasource.url=jdbc:postgresql://localhost:5432/meetingcalendar
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.datasource.username=your_user
 spring.datasource.password=your_password
-```
+```  
 
 Add PostgreSQL dependency to `pom.xml`:
 
-```xml
-<dependency>
-  <groupId>org.postgresql</groupId>
-  <artifactId>postgresql</artifactId>
-</dependency>
-```
-
----
+```xml  
+<dependency>  
+  <groupId>org.postgresql</groupId>  <artifactId>postgresql</artifactId></dependency>  
+```  
+  
+---  
 
 ## API Endpoints
 
@@ -126,30 +131,29 @@ Add PostgreSQL dependency to `pom.xml`:
 
 - `PUT /user/{id}` – Update user (Admin only)
 
----
+---  
 
 ## Example Payload: Create Meeting
 
-```json
-{
-  "title": "Team Sync",
-  "description": "Weekly meeting",
-  "dateTime": "2025-07-01T09:00:00Z",
-  "level": "TEAM",
-  "creator": {
-    "id": 1,
-    "username": "admin"
-  },
-  "participantIds": [2, 3]
-}
-```
+```json  
+{  
+  "title": "Team Sync",  
+  "description": "Weekly meeting",  
+  "dateTime": "2025-07-01T09:00:00Z",  
+  "level": "TEAM",  
+  "creator": {  
+    "id": 1,  
+    "username": "admin"  
+  },  "participantIds": [2, 3]  
+}  
+```  
 
 ## Authorization Header
 
 Authenticated requests must include the token:
 
-```http
-Authorization: Bearer <your_token>
-```
-
+```http  
+Authorization: Bearer <your_token>  
+```  
+  
 ---
