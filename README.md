@@ -146,7 +146,8 @@ Add PostgreSQL dependency to `pom.xml`:
   "creator": {  
     "id": 1,  
     "username": "admin"  
-  },  "participantIds": [2, 3]  
+  },  
+  "participantIds": [2, 3]  
 }  
 ```  
 
