@@ -82,7 +82,7 @@ Username: admin
 Password: L!Bcu4:EHXY;i#2
 ```
 
-You can use this account to log in and access admin-only features.
+You can use this account to log in and access admin-only features. Other test users are also seeded in the database upon first launch.
 
 ---
 
